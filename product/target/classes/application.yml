@@ -1,0 +1,11 @@
+server:
+  port: 9091
+
+spring:
+  application:
+    name: Product Microservice
+  data:
+    mongodb:
+      host: localhost
+      port: 27017
+      database: Marketplace
