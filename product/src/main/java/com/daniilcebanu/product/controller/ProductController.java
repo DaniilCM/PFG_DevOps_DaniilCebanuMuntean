@@ -18,10 +18,12 @@ import org.springframework.web.bind.annotation.RestController;
 import com.daniilcebanu.product.dto.Product;
 import com.daniilcebanu.product.service.ProductService;
 
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
 @RestController
 @RequestMapping("/v1")
 public class ProductController {
-  private static final Logger logger = LoggerFactory.getLogger(ProductController.class);
   private ProductService productService;
 
   public ProductController(ProductService productService) {
@@ -31,7 +33,7 @@ public class ProductController {
   @PostMapping("/addProduct")
   ResponseEntity<Product> addProduct(@RequestBody Product product) {
     String status = productService.addProduct(product);
-    logger.info("Product added status - {}", status);
+    log.info("Product added status - {}", status);
 
     return ResponseEntity.status(HttpStatus.CREATED).body(product);
   }
