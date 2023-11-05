@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.daniilcebanu.product.dto.Product;
 import com.daniilcebanu.product.service.ProductService;
 
+import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
@@ -31,7 +32,7 @@ public class ProductController {
   }
 
   @PostMapping("/addProduct")
-  ResponseEntity<Product> addProduct(@RequestBody Product product) {
+  ResponseEntity<Product> addProduct(@RequestBody @Valid Product product) {
     String status = productService.addProduct(product);
     log.info("Product added status - {}", status);
 
@@ -49,7 +50,7 @@ public class ProductController {
   }
 
   @GetMapping("/product/{id}")
-  Product productById(@PathVariable Integer id) {
+  Product productById(@PathVariable String id) {
     return productService.productById(id);
   }
 
@@ -59,7 +60,7 @@ public class ProductController {
   }
 
   @DeleteMapping("/product/{id}")
-  String deleteProductById(@PathVariable Integer id) {
+  String deleteProductById(@PathVariable String id) {
     return productService.deleteProductById(id);
   }
 }

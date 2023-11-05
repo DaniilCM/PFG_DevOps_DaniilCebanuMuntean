@@ -4,8 +4,8 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
-import com.daniilcebanu.product.ProductRepository;
 import com.daniilcebanu.product.dto.Product;
+import com.daniilcebanu.product.repository.ProductRepository;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -35,7 +35,7 @@ public class ProductService {
     return productRepository.findByCategory(category);
   }
 
-  public Product productById(Integer id) {
+  public Product productById(String id) {
     log.info("Finding product by id");
     return productRepository.findById(id).get();
   }
@@ -47,10 +47,10 @@ public class ProductService {
     return "Product updated successfully";
   }
 
-  public String deleteProductById(Integer id) {
+  public String deleteProductById(String id) {
     log.info("Deleting the product");
     productRepository.deleteById(id);
 
-    return "Product deleted";
+    return "Product deleted successfully";
   }
 }
