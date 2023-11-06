@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
+import com.daniilcebanu.exception.NotValidDiscountException;
 import com.daniilcebanu.product.dto.Product;
 import com.daniilcebanu.product.repository.ProductRepository;
 
@@ -19,6 +20,10 @@ public class ProductService {
   }
 
   public String addProduct(Product product) {
+    if (product.getPrice() == 0 && product.getDiscount() > 0) {
+      throw new NotValidDiscountException("Can't apply a discount to a free product");
+    }
+
     log.info("Adding the product");
     productRepository.save(product);
 
